@@ -54,8 +54,9 @@ def plotting(fig,data,tcol=1,col=0,fs=1000.0):
     df = fs/data.shape[0]
     freq = np.arange(0,fs,df)
     data_fft = fftpack.fft(data)
+    l = len(freq)
     sub2 = fig.add_subplot(3,tcol,ind[2])
-    sub2.plot(freq,np.log10(np.abs(data_fft)),color='blue')
+    sub2.plot(freq[0:int(l/2)],np.log10(np.abs(data_fft[0:int(l/2)])),color='blue')
     sub2.set_title('Power Spectrum', color='blue')
     sub2.set_xlabel('Freq(MHz)')
     sub2.set_ylabel('Power(dB)')
