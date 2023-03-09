@@ -4,7 +4,10 @@ import struct
 import time
 import socket
 import numpy as np
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
+except:
+    pass
 import scipy.fftpack as fftpack
 from argparse import ArgumentParser
 
