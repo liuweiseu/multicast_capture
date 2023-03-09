@@ -41,25 +41,26 @@ class MulticastReceiver(object):
             np.savez('adc_data.npz',metadata=self.metadata,data=self.data)
         return self.data, self.metadata 
     
-def plotting(fig,data,tcol=1,col=0,fs=1000):
+def plotting(fig,data,tcol=1,col=0,fs=1000.0):
     rms = np.std(data)
     mean = np.mean(data)
     ind = np.arange(col,3*tcol,tcol) + 1
     # plot histogram
     sub0 = fig.add_subplot(3,tcol,ind[0])
     sub0.hist(data,bins=np.arange(-128,128),color='red')
-    sub0.set_title('MEAN: %.2f RMS: %.2f'%(mean,rms), c='red')
+    sub0.set_title('MEAN: %.2f RMS: %.2f'%(mean,rms), color='red')
     # plot time series
     sub1 = fig.add_subplot(3,tcol,ind[1])
-    sub1.plot(data,c='green')
-    sub1.set_title('Time Domain Data',c='green')
+    sub1.plot(data,color='green')
+    sub1.set_title('Time Domain Data',color='green')
     # plot power spectrum
     df = fs/data.shape[0]
+    print(df)
     freq = np.arange(0,fs,df)
     data_fft = fftpack.fft(data)
     sub2 = fig.add_subplot(3,tcol,ind[2])
-    sub2.plot(freq,np.log10(np.abs(data_fft)),c='blue')
-    sub2.set_title('Power Spectrum', c='blue')
+    sub2.plot(freq,np.log10(np.abs(data_fft)),color='blue')
+    sub2.set_title('Power Spectrum', color='blue')
     sub2.set_xlabel('Freq(MHz)')
     sub2.set_ylabel('Power(dB)')
     # ready to go
