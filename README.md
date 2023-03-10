@@ -56,7 +56,7 @@ The script is used for checking RMS from 10GbE ports, which connect to SERENDIP6
     done.
     ****************************************
     ```
-    You will see two npz files generated in the same directory. You use `numpy.load()` to load the data.
+    You will see two npz files generated in the same directory. You can use `numpy.load()` to load the data.
 ## More info
 * The `rms.sh` script is based on `multicastpacketcapture.py`. You can run `python multicastpacketcapture.py -h` to get more information.
     ```
