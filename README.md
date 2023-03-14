@@ -43,8 +43,9 @@ The script is used for checking RMS from 10GbE ports, which connect to SERENDIP6
     done.
     ****************************************
     ```
-    You will see a figure show up in a few seconds.![fig](figures/rms.png)  
-    If you add **"--savefig"** option, the figure will be saved with a name of timestamp.
+    You will see a figure show up in a few seconds.  
+    If you add **"--savefig"** option, the figure will be saved with a name of timestamp.  
+    ![fig](figures/rms.png)  
 3. You can also save the data into files for further analysis.
     ```
     $ ./rms.sh --save
