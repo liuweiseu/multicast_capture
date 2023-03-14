@@ -4,6 +4,7 @@ import struct
 import time
 import socket
 import numpy as np
+from datetime import datetime
 try:
     import matplotlib.pyplot as plt
 except:
@@ -79,6 +80,7 @@ def main():
     parser.add_argument('--mport', type=int, dest='mport',default=12345,help='multicast port.')
     parser.add_argument('--save', dest='save', default=False, action='store_true', help='save data to file.')
     parser.add_argument('--show', dest='show', default=False, action='store_true' ,help='show the plot.')
+    parser.add_argument('--savefig', dest='savefig', default=False, action='store_true' ,help='save the figure.')
     args = parser.parse_args()
     ds = 0
     data = np.zeros(2, dtype=object)
@@ -101,15 +103,23 @@ def main():
         if(type(data[i])!=int):
             print('Pol%d -  Mean: %.2f; RMS: %.2f'%(i, np.mean(data[i]),np.std(data[i])))
 
-    if args.show:
-        print('plotting data...')
+    if args.show or args.savefig:
         fig = plt.figure()
         j = 0
         for i in range(len(data)):
             if(type(data[i])!=int):
                 plotting(fig,data[i],ds,j)
                 j = j + 1
-        plt.show()
+        if args.savefig:
+            print('saving figure...')
+            # save the fig
+            t = datetime.now()
+            t_str = datetime.strftime(t, '%Y-%m-%d-%H-%M-%S-%f')
+            fig.savefig(t_str+'.png',dpi=300)
+        if args.show:
+            print('plotting data...')
+            plt.show()
+        plt.close('all')
     print('done.')
     print('****************************************')
 
